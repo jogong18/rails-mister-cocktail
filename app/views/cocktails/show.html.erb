@@ -28,7 +28,7 @@
 
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
   <div class="container">
-    <h1><%= @cocktail %></h1>
+    <h1><%= @cocktail.name.capitalize %></h1>
   </div>
 </div>
 
@@ -36,28 +36,27 @@
 <div class="container">
   <div class='row'>
     <div class="col-8">
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.pexels.com/photos/338713/pexels-photo-338713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);">
+    <!--     <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://images.pexels.com/photos/338713/pexels-photo-338713.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);"> -->
            <% @cocktail.doses.each do |d| %>
            <ul>
             <li>
              <%= d.description %> <%= d.ingredient.name %>
-             <%= class="btn btn-ghost" link_to "Add an ingredient", new_cocktail_path%>
-             <%= class="btn btn-ghost" link_to "Edit", edit_cocktail_path%>
-             <%= class="btn btn-ghost" link_to "Delete", cocktail_path(d),
+             <%= link_to "Delete", dose_path(d), class: "btn btn-ghost",
               method: :delete,
               data: { confirm: "Are you sure?" } %>
-
+            <%= link_to "Edit", edit_cocktail_dose_path(d.cocktail, d) , class: "btn btn-ghost" %>
             </li>
            </ul>
            <% end %>
-        </div>
+          <%= link_to "Add a dose", new_cocktail_dose_path(@cocktail), class: "btn btn-ghost" %>
+        <!-- </div> -->
     </div>
   </div>
 </div>
 
 
 <div>
-  <%= class="btn btn-ghost" link_to "BACK", cocktails_path%>
+  <%=  link_to "BACK", cocktails_path, class: "btn btn-ghost"%>
 </div>
 
 
